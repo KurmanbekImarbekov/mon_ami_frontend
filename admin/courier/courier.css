@@ -1,0 +1,229 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: #111;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+
+.courier-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 25px 40px;
+
+  border-bottom: 1px solid #333;
+}
+
+.courier-header h1 {
+  font-size: 28px;
+  letter-spacing: 4px;
+}
+
+.courier-header p {
+  margin-top: 5px;
+  color: #999;
+}
+
+/* LOGOUT */
+
+#logoutButton {
+  padding: 10px 20px;
+
+  background: transparent;
+  color: #fff;
+
+  border: 1px solid #555;
+  border-radius: 6px;
+
+  cursor: pointer;
+}
+
+#logoutButton:hover {
+  background: #222;
+}
+
+/* MAIN */
+
+.courier-main {
+  max-width: 1100px;
+  margin: 0 auto;
+
+  padding: 40px 20px;
+}
+
+/* TITLE */
+
+.courier-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 30px;
+}
+
+.courier-info h2 {
+  font-size: 26px;
+}
+
+/* REFRESH */
+
+.refresh-button {
+  padding: 10px 18px;
+
+  background: #d4af37;
+  color: #111;
+
+  border: none;
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  font-weight: bold;
+}
+
+.refresh-button:hover {
+  opacity: 0.85;
+}
+
+/* ORDERS */
+
+#orders {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+  gap: 20px;
+}
+
+/* ORDER CARD */
+
+.order-card {
+  background: #181818;
+
+  border: 1px solid #333;
+  border-radius: 12px;
+
+  padding: 25px;
+}
+
+/* TOP */
+
+.order-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+.order-number {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* STATUS */
+
+.status {
+  padding: 6px 10px;
+
+  border-radius: 20px;
+
+  background: #333;
+
+  font-size: 13px;
+}
+
+/* CUSTOMER */
+
+.customer-name {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.customer-info {
+  color: #aaa;
+  line-height: 1.7;
+}
+
+/* TOTAL */
+
+.total {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 25px;
+  padding-top: 15px;
+
+  border-top: 1px solid #333;
+
+  font-size: 18px;
+}
+
+/* BUTTONS */
+
+.order-buttons {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+.order-buttons button {
+  padding: 12px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: #d4af37;
+  color: #111;
+
+  cursor: pointer;
+
+  font-weight: bold;
+}
+
+.order-buttons button:hover {
+  opacity: 0.85;
+}
+
+/* LOADING */
+
+.loading,
+.empty {
+  grid-column: 1 / -1;
+
+  text-align: center;
+
+  padding: 50px;
+
+  color: #888;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .courier-header {
+    padding: 20px;
+  }
+
+  .courier-main {
+    padding: 25px 15px;
+  }
+
+  .courier-info {
+    align-items: flex-start;
+    gap: 15px;
+    flex-direction: column;
+  }
+}

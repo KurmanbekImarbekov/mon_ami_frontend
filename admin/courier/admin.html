@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Mon Ami — Admin</title>
+
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="logo">
+        <span>MON</span>
+        <span>AMI</span>
+      </div>
+
+      <div class="header-right">
+        <span class="admin-label">ADMIN PANEL</span>
+      </div>
+      <button id="logoutButton">Выйти</button>
+    </header>
+
+    <main class="container">
+      <section class="welcome">
+        <div>
+          <p class="small-title">RESTAURANT MANAGEMENT</p>
+
+          <h1>Добро пожаловать 👋</h1>
+
+          <p class="subtitle">Управляйте заказами Mon Ami</p>
+        </div>
+      </section>
+
+      <section class="stats">
+        <div class="stat-card">
+          <span class="stat-label"> ВСЕ ЗАКАЗЫ </span>
+
+          <span class="stat-number" id="totalOrders"> 0 </span>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-label"> НОВЫЕ </span>
+
+          <span class="stat-number" id="newOrders"> 0 </span>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-label"> В РАБОТЕ </span>
+
+          <span class="stat-number" id="activeOrders"> 0 </span>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-label"> ДОСТАВЛЕНО </span>
+
+          <span class="stat-number" id="deliveredOrders"> 0 </span>
+        </div>
+      </section>
+
+      <section class="orders-section">
+        <div class="section-title">
+          <h2>Заказы</h2>
+
+          <button class="refresh-button" onclick="loadOrders()">
+            ↻ Обновить
+          </button>
+        </div>
+
+        <div id="orders" class="orders-grid"></div>
+      </section>
+    </main>
+
+    <script src="admin.js"></script>
+  </body>
+</html>

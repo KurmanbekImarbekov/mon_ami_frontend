@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Mon Ami — Courier</title>
+
+    <link rel="stylesheet" href="courier.css" />
+  </head>
+
+  <body>
+    <header class="courier-header">
+      <div>
+        <h1>MON AMI</h1>
+        <p>Панель курьера</p>
+      </div>
+
+      <button id="logoutButton">Выйти</button>
+    </header>
+
+    <main class="courier-main">
+      <div class="courier-info">
+        <h2>Мои заказы</h2>
+
+        <button id="refreshButton" class="refresh-button">↻ Обновить</button>
+      </div>
+
+      <div id="orders">
+        <div class="loading">Загрузка заказов...</div>
+      </div>
+    </main>
+
+    <script src="courier.js"></script>
+  </body>
+</html>

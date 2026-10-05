@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Test API</title>
+</head>
+<body>
+
+<button id="sendOrder">Отправить заказ</button>
+
+<script>
+    document.getElementById("sendOrder").addEventListener("click", function () {
+
+        fetch("http://127.0.0.1:8000/orders", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                customer_name: "Курманбек",
+                phone: "0555123456",
+                address: "Бишкек",
+                total_price: 1200,
+                items: [
+                    {
+                        product_id: 2,
+                        quantity: 2,
+                        price: 500
+                    }
+                ]
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon Ami - ресторан, кофе и десерты</title>
+    <meta
+      name="description"
+      content="Mon Ami в Бишкеке: премиальное меню, кофе, десерты и доставка."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="site-loader" id="siteLoader" aria-hidden="true">
+      <div class="loader-mark">Mon Ami</div>
+      <div class="loader-line"><span></span></div>
+    </div>
+
+    <header class="navbar" id="navbar">
+      <a class="brand" href="#home" aria-label="Mon Ami">
+        <span class="brand-mark">MA</span>
+        <span class="brand-copy">
+          <strong>Mon Ami</strong>
+          <small>Bishkek</small>
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Главная навигация">
+        <a href="#menu">Меню</a>
+        <a href="#popular">Выбор гостей</a>
+        <a href="#checkout">Доставка</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+
+      <div class="nav-search" role="search">
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path
+            d="m21 21-4.3-4.3m1.3-5.2a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"
+          />
+        </svg>
+        <input
+          id="globalSearch"
+          type="search"
+          placeholder="Найти блюдо"
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="nav-actions">
+        <button
+          class="icon-button mobile-menu-button"
+          id="mobileMenuButton"
+          type="button"
+          aria-label="Открыть меню"
+          aria-expanded="false"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+        <button
+          class="cart-pill"
+          id="cartButton"
+          type="button"
+          aria-label="Открыть корзину"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path
+              d="M6.5 8h11l-.9 10.3a2 2 0 0 1-2 1.7H9.4a2 2 0 0 1-2-1.7L6.5 8Zm3-2.5a2.5 2.5 0 0 1 5 0V8h-5V5.5Z"
+            />
+          </svg>
+          <span>Корзина</span>
+          <strong id="cartCount">0</strong>
+        </button>
+      </div>
+    </header>
+
+    <div class="mobile-panel" id="mobilePanel" aria-hidden="true">
+      <a href="#menu">Меню</a>
+      <a href="#popular">Выбор гостей</a>
+      <a href="#checkout">Доставка</a>
+      <a href="#contacts">Контакты</a>
+    </div>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-media" aria-hidden="true">
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            poster="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=80"
+          >
+            <source src="assets/videos/paris.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="hero-content reveal">
+          <p class="eyebrow">Restaurant & coffee house</p>
+          <h1>Mon Ami</h1>
+          <p class="hero-lead">
+            Французская легкость, авторское меню и спокойный сервис для
+            завтраков, обедов и вечерних заказов.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#menu">Заказать сейчас</a>
+            <a class="secondary-button" href="#popular">Смотреть популярное</a>
+          </div>
+        </div>
+        <div class="hero-card reveal" aria-label="Информация о доставке">
+          <span>Сегодня</span>
+          <strong>Доставка 35-45 мин</strong>
+          <small>Свежая кухня, кофе и десерты</small>
+        </div>
+      </section>
+
+      <section class="quick-stats" aria-label="Преимущества Mon Ami">
+        <div>
+          <strong id="categoryStat">26</strong>
+          <span>категорий</span>
+        </div>
+        <div>
+          <strong id="productStat">221</strong>
+          <span>позиций меню</span>
+        </div>
+        <div>
+          <strong>4.9</strong>
+          <span>атмосфера</span>
+        </div>
+      </section>
+
+      <section class="feature-band" id="popular">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Выбор гостей</p>
+          <h2>Блюда, с которых приятно начать</h2>
+        </div>
+        <div class="featured-row" id="featuredRow" aria-live="polite"></div>
+      </section>
+
+      <section class="menu-section" id="menu">
+        <div class="menu-head reveal">
+          <div>
+            <p class="eyebrow">Меню</p>
+            <h2>Все категории из меню Mon Ami</h2>
+          </div>
+          <div class="menu-tools">
+            <label class="menu-search" for="menuSearch">
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path
+                  d="m21 21-4.3-4.3m1.3-5.2a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"
+                />
+              </svg>
+              <input
+                id="menuSearch"
+                type="search"
+                placeholder="Поиск по названию, тегам, описанию"
+                autocomplete="off"
+              />
+            </label>
+          </div>
+        </div>
+
+        <div
+          class="category-strip"
+          id="categoryStrip"
+          aria-label="Категории меню"
+        ></div>
+        <div class="results-line" id="resultsLine" aria-live="polite"></div>
+        <div class="products-grid" id="productsGrid" aria-live="polite">
+          <article class="skeleton-card"></article>
+          <article class="skeleton-card"></article>
+          <article class="skeleton-card"></article>
+          <article class="skeleton-card"></article>
+        </div>
+      </section>
+
+      <section class="checkout-preview" id="checkout">
+        <div class="checkout-copy reveal">
+          <p class="eyebrow">Доставка</p>
+          <h2>Оформление без лишнего шума</h2>
+          <p>
+            Добавьте блюда в корзину, заполните данные доставки и выберите
+            удобный способ оплаты: MBank, Bakai или наличные.
+          </p>
+        </div>
+        <div class="checkout-stack reveal">
+          <form class="checkout-card" id="checkoutForm" novalidate>
+            <fieldset class="choice-group">
+              <legend>Получение</legend>
+              <label
+                ><input
+                  type="radio"
+                  name="deliveryMethod"
+                  value="delivery"
+                  checked
+                />
+                Доставка</label
+              >
+              <label
+                ><input type="radio" name="deliveryMethod" value="pickup" />
+                Самовывоз</label
+              >
+            </fieldset>
+
+            <div class="form-row">
+              <label
+                >Имя<input
+                  name="name"
+                  autocomplete="name"
+                  data-required="true" /><span
+                  class="field-error"
+                  data-error-for="name"
+                ></span
+              ></label>
+              <label
+                >Телефон<input
+                  name="phone"
+                  type="tel"
+                  autocomplete="tel"
+                  data-required="true" /><span
+                  class="field-error"
+                  data-error-for="phone"
+                ></span
+              ></label>
+            </div>
+
+            <label class="delivery-field"
+              >Адрес<input
+                name="address"
+                autocomplete="street-address"
+                data-required="true" /><span
+                class="field-error"
+                data-error-for="address"
+              ></span
+            ></label>
+            <div class="form-row delivery-field">
+              <label
+                >Квартира<input name="apartment" data-required="true" /><span
+                  class="field-error"
+                  data-error-for="apartment"
+                ></span
+              ></label>
+              <label
+                >Этаж<input
+                  name="floor"
+                  inputmode="numeric"
+                  data-required="true" /><span
+                  class="field-error"
+                  data-error-for="floor"
+                ></span
+              ></label>
+            </div>
+            <label class="delivery-field"
+              >Подъезд<input name="entrance" data-required="true" /><span
+                class="field-error"
+                data-error-for="entrance"
+              ></span
+            ></label>
+
+            <label
+              >Комментарий<textarea
+                name="comment"
+                rows="3"
+                placeholder="Например: не звонить в домофон"
+              ></textarea
+              ><span class="field-error" data-error-for="comment"></span
+            ></label>
+
+            <fieldset class="choice-group">
+              <legend>Оплата</legend>
+              <label
+                ><input type="radio" name="payment" value="MBank" checked />
+                MBank</label
+              >
+              <label
+                ><input type="radio" name="payment" value="Bakai" />
+                Bakai</label
+              >
+              <label
+                ><input type="radio" name="payment" value="Cash" />
+                Наличные</label
+              >
+            </fieldset>
+
+            <button class="primary-button" type="submit" id="submitOrderButton">
+              Подтвердить заказ
+            </button>
+            <p class="form-note" id="checkoutNote" role="status"></p>
+          </form>
+
+          <aside class="checkout-summary" aria-label="Итог заказа">
+            <div class="summary-heading">
+              <span>Ваш заказ</span>
+              <strong id="checkoutItemCount">0 позиций</strong>
+            </div>
+            <div class="summary-lines">
+              <div>
+                <span>Сумма</span><strong id="checkoutSubtotal">0 сом</strong>
+              </div>
+              <div>
+                <span>Доставка</span
+                ><strong id="checkoutDelivery">0 сом</strong>
+              </div>
+              <div>
+                <span>Сервис</span><strong id="checkoutService">0 сом</strong>
+              </div>
+              <div>
+                <span>Скидка</span><strong id="checkoutDiscount">0 сом</strong>
+              </div>
+              <div class="total-row">
+                <span>Итого</span><strong id="checkoutTotal">0 сом</strong>
+              </div>
+            </div>
+            <p id="checkoutEta">
+              Добавьте блюда, чтобы увидеть время доставки.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="success-section" id="success" hidden>
+        <div class="success-card">
+          <span class="success-mark">✓</span>
+          <p class="eyebrow">Заказ принят</p>
+          <h2>Спасибо!</h2>
+          <div class="success-details">
+            <div>
+              <span>Номер заказа</span
+              ><strong id="successOrderNumber">-</strong>
+            </div>
+            <div>
+              <span>Статус</span><strong id="successOrderStatus">Создан</strong>
+            </div>
+            <div>
+              <span>Ожидаемое время</span
+              ><strong id="successEta">35-45 мин</strong>
+            </div>
+          </div>
+          <a class="primary-button" href="#menu" id="continueShoppingButton"
+            >Продолжить покупки</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" id="contacts">
+      <div>
+        <strong>Mon Ami</strong>
+        <p>Ресторан, кофе и десерты в Бишкеке.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#menu">Меню</a>
+        <a href="#checkout">Доставка</a>
+        <a
+          href="https://instagram.com/monami.bishkek"
+          target="_blank"
+          rel="noreferrer"
+          >Instagram</a
+        >
+      </div>
+    </footer>
+
+    <aside
+      class="cart-drawer"
+      id="cartDrawer"
+      aria-hidden="true"
+      aria-label="Корзина"
+    >
+      <div class="cart-header">
+        <div>
+          <span>Ваш заказ</span>
+          <strong id="cartTitle">Корзина пуста</strong>
+        </div>
+        <button
+          class="icon-button"
+          id="closeCartButton"
+          type="button"
+          aria-label="Закрыть корзину"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M6 6l12 12M18 6 6 18" />
+          </svg>
+        </button>
+      </div>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="cart-summary" id="cartSummary">
+        <div class="cart-eta">
+          <span>Примерное время</span><strong id="cartEta">35-45 мин</strong>
+        </div>
+        <label class="promo-field" for="promoInput">
+          <span>Промокод</span>
+          <span class="promo-control"
+            ><input id="promoInput" type="text" placeholder="MONAMI10" /><button
+              id="applyPromoButton"
+              type="button"
+            >
+              OK
+            </button></span
+          >
+        </label>
+        <div><span>Сумма</span><strong id="subtotalValue">0 сом</strong></div>
+        <div>
+          <span>Доставка</span><strong id="deliveryValue">0 сом</strong>
+        </div>
+        <div><span>Сервис</span><strong id="serviceValue">0 сом</strong></div>
+        <div><span>Скидка</span><strong id="discountValue">0 сом</strong></div>
+        <div class="total-row">
+          <span>Итого</span><strong id="totalValue">0 сом</strong>
+        </div>
+        <a class="primary-button" href="#checkout" id="checkoutLink"
+          >Оформить</a
+        >
+        <button class="secondary-button" id="clearCartButton" type="button">
+          Очистить корзину
+        </button>
+      </div>
+    </aside>
+
+    <div class="scrim" id="scrim" hidden></div>
+
+    <dialog
+      class="product-dialog"
+      id="productDialog"
+      aria-label="Карточка блюда"
+    >
+      <button
+        class="icon-button dialog-close"
+        id="closeProductButton"
+        type="button"
+        aria-label="Закрыть"
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M6 6l12 12M18 6 6 18" />
+        </svg>
+      </button>
+      <div id="productDialogContent"></div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <div class="auth-modal" id="authModal">
+      <div class="auth-modal-overlay" id="authModalOverlay"></div>
+
+      <div class="auth-modal-content">
+        <button class="auth-modal-close" id="authModalClose" type="button">
+          ×
+        </button>
+
+        <div class="auth-modal-logo">MON AMI</div>
+
+        <!-- РЕГИСТРАЦИЯ -->
+
+        <div id="registerBlock">
+          <h2>Добро пожаловать</h2>
+
+          <p class="auth-modal-text">
+            Зарегистрируйтесь, чтобы добавлять блюда в корзину и оформлять
+            заказы.
+          </p>
+
+          <form id="registerForm">
+            <div class="auth-field">
+              <label for="registerUsername"> Имя пользователя </label>
+
+              <input
+                id="registerUsername"
+                type="text"
+                placeholder="Введите имя"
+                required
+              />
+            </div>
+
+            <div class="auth-field">
+              <label for="registerPassword"> Пароль </label>
+
+              <input
+                id="registerPassword"
+                type="password"
+                placeholder="Введите пароль"
+                required
+              />
+            </div>
+
+            <div class="auth-field">
+              <label for="registerPasswordConfirm"> Повторите пароль </label>
+
+              <input
+                id="registerPasswordConfirm"
+                type="password"
+                placeholder="Повторите пароль"
+                required
+              />
+            </div>
+
+            <p class="auth-error" id="registerError"></p>
+
+            <button class="auth-submit" type="submit">
+              Зарегистрироваться
+            </button>
+          </form>
+
+          <button class="auth-switch" id="showLoginButton" type="button">
+            Уже есть аккаунт? Войти
+          </button>
+        </div>
+
+        <!-- ВХОД -->
+
+        <div id="loginBlock" style="display: none">
+          <h2>С возвращением</h2>
+
+          <p class="auth-modal-text">Войдите, чтобы продолжить заказ.</p>
+
+          <form id="customerLoginForm">
+            <div class="auth-field">
+              <label for="loginUsername"> Имя пользователя </label>
+
+              <input
+                id="loginUsername"
+                type="text"
+                placeholder="Введите имя"
+                required
+              />
+            </div>
+
+            <div class="auth-field">
+              <label for="loginPassword"> Пароль </label>
+
+              <input
+                id="loginPassword"
+                type="password"
+                placeholder="Введите пароль"
+                required
+              />
+            </div>
+
+            <p class="auth-error" id="loginError"></p>
+
+            <button class="auth-submit" type="submit">Войти</button>
+          </form>
+
+          <button class="auth-switch" id="showRegisterButton" type="button">
+            Нет аккаунта? Зарегистрироваться
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="js/menu.js"></script>
+    <script src="js/order-service.js"></script>
+    <script src="js/main.js" defer></script>
+  </body>
+</html>
