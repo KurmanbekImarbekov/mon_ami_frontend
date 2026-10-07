@@ -75,31 +75,34 @@
   // Отправка оплаченного заказа в FastAPI
   async function sendOrderToBackend(order) {
     try {
-      var response = await fetch("http://127.0.0.1:8000/orders", {
-        method: "POST",
+      var response = await fetch(
+        "https://attract-lately-terrorist-handled.trycloudflare.com/orders",
+        {
+          method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
-        },
+          headers: {
+            "Content-Type": "application/json",
+          },
 
-        body: JSON.stringify({
-          customer_name: order.customer?.name || "Не указано",
+          body: JSON.stringify({
+            customer_name: order.customer?.name || "Не указано",
 
-          phone: order.customer?.phone || "Не указан",
+            phone: order.customer?.phone || "Не указан",
 
-          address: order.deliveryAddress?.address || "Самовывоз",
+            address: order.deliveryAddress?.address || "Самовывоз",
 
-          total_price: order.totals?.total || 0,
+            total_price: order.totals?.total || 0,
 
-          items: (order.items || []).map(function (item) {
-            return {
-              product_id: item.productId,
-              quantity: item.quantity,
-              price: item.price,
-            };
+            items: (order.items || []).map(function (item) {
+              return {
+                product_id: item.productId,
+                quantity: item.quantity,
+                price: item.price,
+              };
+            }),
           }),
-        }),
-      });
+        },
+      );
 
       var data = await response.json();
 
