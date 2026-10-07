@@ -43,8 +43,9 @@
         },
 
         body: JSON.stringify({
-          name: order.customer?.name || "Не указано",
+          action: "new_order",
 
+          name: order.customer?.name || "Не указано",
           phone: order.customer?.phone || "Не указан",
 
           address:
@@ -57,11 +58,8 @@
                 : "") || "Не указан",
 
           comment: order.deliveryAddress?.comment || "",
-
           total: order.totals?.total || 0,
-
           orderNumber: order.orderNumber,
-
           items: order.items || [],
         }),
       });
