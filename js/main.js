@@ -647,7 +647,7 @@
   }
 
   function verifyCustomerToken(token) {
-    return fetch("https://hazards-shapes-tap-modelling.trycloudflare.com/me", {
+    return fetch("https://attract-lately-terrorist-handled.trycloudflare.com/me", {
       method: "GET",
       headers: { Authorization: "Bearer " + token },
     })
@@ -723,7 +723,7 @@
       return;
     }
 
-    fetch("https://hazards-shapes-tap-modelling.trycloudflare.com/users", {
+    fetch("https://attract-lately-terrorist-handled.trycloudflare.com/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: username, password: password }),
@@ -767,7 +767,7 @@
   }
 
   function loginRequest(username, password) {
-    return fetch("https://hazards-shapes-tap-modelling.trycloudflare.com/login", {
+    return fetch("https://attract-lately-terrorist-handled.trycloudflare.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: username, password: password }),
