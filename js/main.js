@@ -647,7 +647,7 @@
   }
 
   function verifyCustomerToken(token) {
-    return fetch("http://127.0.0.1:8000/me", {
+    return fetch("https://hazards-shapes-tap-modelling.trycloudflare.com/me", {
       method: "GET",
       headers: { Authorization: "Bearer " + token },
     })
@@ -723,7 +723,7 @@
       return;
     }
 
-    fetch("http://127.0.0.1:8000/users", {
+    fetch("https://hazards-shapes-tap-modelling.trycloudflare.com/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: username, password: password }),
@@ -767,7 +767,7 @@
   }
 
   function loginRequest(username, password) {
-    return fetch("http://127.0.0.1:8000/login", {
+    return fetch("https://hazards-shapes-tap-modelling.trycloudflare.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: username, password: password }),
