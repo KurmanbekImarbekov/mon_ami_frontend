@@ -142,7 +142,124 @@
         </div>
         <div class="featured-row" id="featuredRow" aria-live="polite"></div>
       </section>
+      <section class="ai-section" id="ai">
+        <div class="ai-chat">
+          <div class="ai-chat-header">
+            <div class="ai-avatar">✦</div>
 
+            <div class="ai-chat-title">
+              <span>MON AMI AI</span>
+              <small>Ваш персональный помощник</small>
+            </div>
+
+            <div class="ai-online">
+              <span></span>
+              Online
+            </div>
+          </div>
+
+          <div class="ai-chat-body">
+            <div class="ai-message ai-message-bot">
+              <div class="ai-mini-avatar">✦</div>
+
+              <div class="ai-message-content">
+                <span class="ai-name">Mon Ami AI</span>
+
+                <p>
+                  Bonjour! 👋<br />
+                  Помогу подобрать блюда именно для вас. Расскажите, сколько вас
+                  человек, какой бюджет и что хочется поесть.
+                </p>
+
+                <div class="ai-suggestions">
+                  <button
+                    type="button"
+                    class="ai-suggestion"
+                    data-ai-text="Нас 2 человека, бюджет 2500 сом. Хотим что-нибудь куриное."
+                  >
+                    🍗 Курица
+                  </button>
+
+                  <button
+                    type="button"
+                    class="ai-suggestion"
+                    data-ai-text="Нас 2 человека, бюджет 3000 сом. Хотим что-нибудь мясное."
+                  >
+                    🥩 Мясо
+                  </button>
+
+                  <button
+                    type="button"
+                    class="ai-suggestion"
+                    data-ai-text="Нас 2 человека, бюджет 3000 сом. Хотим что-нибудь рыбное."
+                  >
+                    🐟 Рыба
+                  </button>
+
+                  <button
+                    type="button"
+                    class="ai-suggestion"
+                    data-ai-text="Нас 3 человека, бюджет 3000 сом. Хотим пиццу."
+                  >
+                    🍕 Пицца
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="ai-messages" id="aiMessages"></div>
+
+            <div class="ai-result" id="aiResult" hidden>
+              <div class="ai-result-top">
+                <div>
+                  <span>Персональная подборка</span>
+                  <strong>Для вас</strong>
+                </div>
+
+                <div class="ai-total">
+                  <small>Итого</small>
+                  <strong id="aiTotal"></strong>
+                </div>
+              </div>
+
+              <div class="ai-products" id="aiProducts"></div>
+
+              <button type="button" class="ai-add-all" id="aiAddAll">
+                🛒 Добавить всё в корзину
+              </button>
+              <button type="button" class="ai-another" id="aiAnother">
+                ↻ Подобрать другой вариант
+              </button>
+            </div>
+          </div>
+
+          <div class="ai-chat-footer">
+            <div class="ai-input-wrapper">
+              <textarea
+                id="aiInput"
+                rows="1"
+                placeholder="Например: нас 4, бюджет 3000, хотим мясо..."
+              ></textarea>
+
+              <button
+                type="button"
+                id="aiRecommendButton"
+                class="ai-send"
+                aria-label="Отправить"
+              >
+                ↑
+              </button>
+            </div>
+
+            <p class="ai-status" id="aiStatus"></p>
+
+            <div class="ai-powered">
+              <span>✦</span>
+              Powered by Mon Ami AI
+            </div>
+          </div>
+        </div>
+      </section>
       <section class="menu-section" id="menu">
         <div class="menu-head reveal">
           <div>

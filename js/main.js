@@ -236,6 +236,15 @@
       "continueShoppingButton",
     );
     els.toast = document.getElementById("toast");
+    els.aiInput = document.getElementById("aiInput");
+    els.aiRecommendButton = document.getElementById("aiRecommendButton");
+    els.aiMessages = document.getElementById("aiMessages");
+    els.aiStatus = document.getElementById("aiStatus");
+    els.aiResult = document.getElementById("aiResult");
+    els.aiProducts = document.getElementById("aiProducts");
+    els.aiTotal = document.getElementById("aiTotal");
+    els.aiAddAll = document.getElementById("aiAddAll");
+    els.aiAnother = document.getElementById("aiAnother");
   }
 
   function bindEvents() {
@@ -344,6 +353,33 @@
         closeMobileMenu();
         closeProduct();
       }
+    });
+
+    if (els.aiRecommendButton) {
+      els.aiRecommendButton.addEventListener("click", getAIRecommendation);
+    }
+    if (els.aiAddAll) {
+      els.aiAddAll.addEventListener("click", addAllAIProductsToCart);
+    }
+    if (els.aiAnother) {
+      els.aiAnother.addEventListener("click", getAnotherAIRecommendation);
+    }
+    if (els.aiInput && els.aiRecommendButton) {
+      els.aiInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+          event.preventDefault();
+
+          if (!els.aiRecommendButton.disabled) {
+            getAIRecommendation();
+          }
+        }
+      });
+    }
+    document.querySelectorAll(".ai-suggestion").forEach(function (button) {
+      button.addEventListener("click", function () {
+        els.aiInput.value = button.dataset.aiText;
+        getAIRecommendation();
+      });
     });
   }
 
@@ -647,7 +683,7 @@
   }
 
   function verifyCustomerToken(token) {
-    return fetch("https://attract-lately-terrorist-handled.trycloudflare.com/me", {
+    return fetch("https://steady-units-priest-experiment.trycloudflare.com/me", {
       method: "GET",
       headers: { Authorization: "Bearer " + token },
     })
@@ -723,7 +759,7 @@
       return;
     }
 
-    fetch("https://attract-lately-terrorist-handled.trycloudflare.com/users", {
+    fetch("https://steady-units-priest-experiment.trycloudflare.com/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: username, password: password }),
@@ -767,7 +803,7 @@
   }
 
   function loginRequest(username, password) {
-    return fetch("https://attract-lately-terrorist-handled.trycloudflare.com/login", {
+    return fetch("https://steady-units-priest-experiment.trycloudflare.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: username, password: password }),
@@ -1774,5 +1810,261 @@
 
   function heartIcon() {
     return '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 8.6c0 5-8.8 10.2-8.8 10.2S3.2 13.6 3.2 8.6a4.6 4.6 0 0 1 8.2-2.8 4.6 4.6 0 0 1 8.2 2.8Z"/></svg>';
+  }
+
+  let aiShownProductIds = [];
+
+  function getAIRecommendation() {
+    var message = els.aiInput.value.trim();
+    window.lastAIMessage = message;
+
+    if (!message) {
+      els.aiStatus.textContent = "\u041d\u0430\u043f\u0438\u0448\u0438\u0442\u0435, \u0447\u0442\u043e \u0432\u044b \u0445\u043e\u0442\u0438\u0442\u0435 \u043f\u043e\u0435\u0441\u0442\u044c.";
+      return;
+    }
+
+    aiShownProductIds = [];
+    addAIUserMessage(message);
+
+    els.aiInput.value = "";
+    els.aiStatus.textContent = "Mon Ami AI \u043f\u043e\u0434\u0431\u0438\u0440\u0430\u0435\u0442 \u0431\u043b\u044e\u0434\u0430...";
+    els.aiRecommendButton.disabled = true;
+    els.aiResult.hidden = true;
+
+    fetch("https://steady-units-priest-experiment.trycloudflare.com/ai/recommend", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: message,
+        exclude_ids: aiShownProductIds
+      })
+    })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("\u041e\u0448\u0438\u0431\u043a\u0430 \u0441\u0435\u0440\u0432\u0435\u0440\u0430: " + response.status);
+        }
+
+        return response.json();
+      })
+      .then(function (data) {
+        addAIBotMessage(data);
+        renderAIRecommendations(data);
+        els.aiStatus.textContent = "";
+      })
+      .catch(function (error) {
+        console.error("AI error:", error);
+        addAIBotMessageError();
+        els.aiStatus.textContent = "";
+      })
+      .finally(function () {
+        els.aiRecommendButton.disabled = false;
+      });
+  }
+
+  function getAnotherAIRecommendation() {
+    if (!window.lastAIMessage) {
+      return;
+    }
+
+    els.aiStatus.textContent = "Подбираю другой вариант...";
+    els.aiRecommendButton.disabled = true;
+
+    fetch("https://steady-units-priest-experiment.trycloudflare.com/ai/recommend", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: window.lastAIMessage,
+        exclude_ids: aiShownProductIds
+      })
+    })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("Ошибка сервера: " + response.status);
+        }
+
+        return response.json();
+      })
+      .then(function (data) {
+        addAIBotMessage(data);
+        renderAIRecommendations(data);
+        els.aiStatus.textContent = "";
+      })
+      .catch(function (error) {
+        console.error("AI error:", error);
+        addAIBotMessageError();
+        els.aiStatus.textContent = "";
+      })
+      .finally(function () {
+        els.aiRecommendButton.disabled = false;
+      });
+  }
+
+  function addAllAIProductsToCart() {
+    if (!window.lastAIRecommendations || !window.lastAIRecommendations.length) {
+      return;
+    }
+
+    var token = localStorage.getItem("monami_customer_token");
+
+    if (!token) {
+      openAuthModal(window.lastAIRecommendations[0].id, 1);
+      return;
+    }
+
+    verifyCustomerToken(token).then(function (valid) {
+      if (!valid) {
+        localStorage.removeItem("monami_customer_token");
+        openAuthModal(window.lastAIRecommendations[0].id, 1);
+        return;
+      }
+
+      window.lastAIRecommendations.forEach(function (product) {
+        addToCart(product.id, 1, {
+          openCart: false,
+        });
+      });
+
+      showToast({
+        title: "AI-подборка добавлена",
+        message: "Все блюда добавлены в корзину",
+        tone: "success",
+        action: "Корзина",
+      });
+    });
+  }
+
+  function addAIUserMessage(message) {
+    if (!els.aiMessages) return;
+
+    var messageElement = document.createElement("div");
+    var text = document.createElement("p");
+
+    messageElement.className = "ai-user-message";
+    text.textContent = message;
+    messageElement.appendChild(text);
+    els.aiMessages.appendChild(messageElement);
+
+    scrollAIChat();
+  }
+
+  function addAIBotMessage(data) {
+    if (!els.aiMessages) return;
+
+    var messageElement = document.createElement("div");
+    var avatar = document.createElement("div");
+    var content = document.createElement("div");
+    var name = document.createElement("span");
+    var text = document.createElement("p");
+    var recommendationCount = data.recommendations.length;
+
+    messageElement.className = "ai-message ai-message-bot";
+    avatar.className = "ai-mini-avatar";
+    avatar.textContent = "✦";
+    content.className = "ai-message-content";
+    name.className = "ai-name";
+    name.textContent = "Mon Ami AI";
+    text.textContent =
+      "Я подобрал " +
+      recommendationCount +
+      " блюд для вас. Проверьте подборку ниже ✦";
+
+    content.appendChild(name);
+    content.appendChild(text);
+    messageElement.appendChild(avatar);
+    messageElement.appendChild(content);
+    els.aiMessages.appendChild(messageElement);
+
+    scrollAIChat();
+  }
+
+  function addAIBotMessageError() {
+    if (!els.aiMessages) return;
+
+    var messageElement = document.createElement("div");
+    var avatar = document.createElement("div");
+    var content = document.createElement("div");
+    var name = document.createElement("span");
+    var text = document.createElement("p");
+
+    messageElement.className = "ai-message ai-message-bot";
+    avatar.className = "ai-mini-avatar";
+    avatar.textContent = "✦";
+    content.className = "ai-message-content";
+    name.className = "ai-name";
+    name.textContent = "Mon Ami AI";
+    text.textContent =
+      "Не получилось подобрать блюда. Попробуйте сформулировать запрос немного иначе.";
+
+    content.appendChild(name);
+    content.appendChild(text);
+    messageElement.appendChild(avatar);
+    messageElement.appendChild(content);
+    els.aiMessages.appendChild(messageElement);
+
+    scrollAIChat();
+  }
+
+  function scrollAIChat() {
+    if (!els.aiMessages) return;
+
+    els.aiMessages.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
+  }
+
+  function renderAIRecommendations(data) {
+    window.lastAIRecommendations = data.recommendations;
+    data.recommendations.forEach(function (product) {
+      if (!aiShownProductIds.includes(product.id)) {
+        aiShownProductIds.push(product.id);
+      }
+    });
+
+    console.log("AI REQUEST:", data.request);
+    console.log("AI RECOMMENDATIONS:", data.recommendations);
+    if (!els.aiProducts || !els.aiTotal || !els.aiResult) return;
+
+    els.aiProducts.innerHTML = "";
+    els.aiTotal.textContent = data.total + " сом";
+
+    data.recommendations.forEach(function (product) {
+      var card = document.createElement("div");
+      var image = document.createElement("img");
+      var info = document.createElement("div");
+      var name = document.createElement("h3");
+      var description = document.createElement("p");
+      var price = document.createElement("strong");
+      var addButton = document.createElement("button");
+
+      card.className = "ai-product-card";
+      image.src = getProductImage(productById.get(product.id) || product);
+      image.alt = product.name;
+      info.className = "ai-product-info";
+      name.textContent = product.name;
+      description.textContent = product.description;
+      price.textContent = product.price + " сом";
+      addButton.className = "ai-product-add";
+      addButton.textContent = "Добавить";
+      addButton.type = "button";
+
+      addButton.addEventListener("click", function () {
+        handleAddToCart(product.id, 1);
+      });
+
+      info.appendChild(name);
+      info.appendChild(description);
+      info.appendChild(price);
+      info.appendChild(addButton);
+      card.appendChild(image);
+      card.appendChild(info);
+      els.aiProducts.appendChild(card);
+    });
+
+    els.aiResult.hidden = false;
   }
 })();

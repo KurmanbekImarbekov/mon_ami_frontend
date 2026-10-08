@@ -74,7 +74,7 @@
   async function sendOrderToBackend(order) {
     try {
       var response = await fetch(
-        "https://attract-lately-terrorist-handled.trycloudflare.com/orders",
+        "https://steady-units-priest-experiment.trycloudflare.com/orders",
         {
           method: "POST",
 
