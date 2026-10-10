@@ -683,7 +683,7 @@
   }
 
   function verifyCustomerToken(token) {
-    return fetch("https://steady-units-priest-experiment.trycloudflare.com/me", {
+    return fetch("https://bubble-cigarettes-inter-chosen.trycloudflare.com/me", {
       method: "GET",
       headers: { Authorization: "Bearer " + token },
     })
@@ -759,7 +759,7 @@
       return;
     }
 
-    fetch("https://steady-units-priest-experiment.trycloudflare.com/users", {
+    fetch("https://bubble-cigarettes-inter-chosen.trycloudflare.com/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: username, password: password }),
@@ -803,7 +803,7 @@
   }
 
   function loginRequest(username, password) {
-    return fetch("https://steady-units-priest-experiment.trycloudflare.com/login", {
+    return fetch("https://bubble-cigarettes-inter-chosen.trycloudflare.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: username, password: password }),
@@ -1831,7 +1831,7 @@
     els.aiRecommendButton.disabled = true;
     els.aiResult.hidden = true;
 
-    fetch("https://steady-units-priest-experiment.trycloudflare.com/ai/recommend", {
+    fetch("https://bubble-cigarettes-inter-chosen.trycloudflare.com/ai/recommend", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -1871,7 +1871,7 @@
     els.aiStatus.textContent = "Подбираю другой вариант...";
     els.aiRecommendButton.disabled = true;
 
-    fetch("https://steady-units-priest-experiment.trycloudflare.com/ai/recommend", {
+    fetch("https://bubble-cigarettes-inter-chosen.trycloudflare.com/ai/recommend", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
